@@ -156,6 +156,7 @@ AI 이미지 생성(Stable Diffusion, Flux)과 ComfyUI 워크플로우에 대한
 | 문서 | 난이도 | 설명 |
 |------|--------|------|
 | [SD/SDXL 가이드](docs/02-models/sd-sdxl/README.md) | 🌿 중급 | 일반 SD 모델 사용법 |
+| [해상도 최적화](docs/02-models/sd-sdxl/resolution-optimization.md) | 🌿 중급 | SDXL 해상도 설정 |
 
 #### Flux
 
