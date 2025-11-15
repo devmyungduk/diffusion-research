@@ -22,7 +22,9 @@ Stable Diffusion 1.5와 SDXL 모델의 사용법을 다룹니다.
 2. [기본 사용법](#기본-사용법)
 3. [권장 설정](#권장-설정)
 4. [문제 해결](#문제-해결)
+## 📑 문서 목록
 
+- [해상도 최적화](./resolution-optimization.md) - SDXL 최적 해상도 가이드
 ---
 
 ## SD 1.5 vs SDXL 비교
