@@ -295,7 +295,6 @@ Educational Use - 교육 목적으로 자유롭게 사용 가능
 ## 🔗 관련 링크
 
 - [ComfyUI GitHub](https://github.com/comfyanonymous/ComfyUI)
-- [Stable Diffusion](https://stability.ai)
 - [Flux Models](https://blackforestlabs.ai)
 - [Civitai - 모델 공유](https://civitai.com)
 
