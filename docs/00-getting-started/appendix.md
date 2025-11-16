@@ -38,11 +38,6 @@
 - [Stable Diffusion 공식 문서](https://stability.ai)
 - [Flux 모델 문서](https://blackforestlabs.ai)
 
-### 커뮤니티
-- [ComfyUI Discord](https://discord.gg/comfyui)
-- [Reddit r/StableDiffusion](https://reddit.com/r/StableDiffusion)
-- [Civitai - 모델/LoRA 공유](https://civitai.com)
-
 ### 학습 자료
 - [ComfyUI YouTube 튜토리얼](https://youtube.com/results?search_query=comfyui+tutorial)
 - [Hugging Face 모델 허브](https://huggingface.co)
@@ -57,16 +52,6 @@
 ## 마무리
 
 이 가이드는 ComfyUI를 처음 시작하는 분들을 위한 것입니다.
-
-**기억하세요:**
-- 실수해도 괜찮습니다
-- 다양한 설정을 실험해보세요
-- 커뮤니티에서 도움을 구하세요
-- 즐기면서 배우세요! 🎨
-
-**피드백:**
-이 가이드에 대한 의견이나 추가 요청사항이 있다면
-ComfyUI 커뮤니티에서 공유해주세요.
 
 ---
 
