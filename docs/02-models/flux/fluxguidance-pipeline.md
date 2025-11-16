@@ -508,8 +508,8 @@ Step 3: 미세 조정
 ## 관련 문서
 
 - 📖 [Flux Complete Guide](./README.md) - Flux 모델 전체 가이드
-- 🎮 [ControlNet 구조](../controlnet/controlnet-architecture.md) - ControlNet 아키텍처 분석
-- ⚙️ [Sampler 비교](../samplers/sampler-comparison.md) - 샘플러 특성 비교
+- 🎮 [ControlNet 구조](../../03-advanced-techniques/controlnet/controlnet-architecture.md) - ControlNet 아키텍처 분석
+- ⚙️ [Sampler 비교](../../03-advanced-techniques/samplers/sampler-comparison.md) - 샘플러 특성 비교
 
 ---
 

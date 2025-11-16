@@ -189,9 +189,9 @@ AI 이미지 생성(Stable Diffusion, Flux)과 ComfyUI 워크플로우에 대한
 | [워크플로우 모음](docs/04-workflows/README.md) | 🌱-🌳 | 실전 예제들 |
 
 **포함 예정:**
-- 기본 Text-to-Image
-- Image-to-Image
-- 고급 합성 워크플로우
+
+- Inpainting-Techniques
+- Qwen-Image
 
 ---
 

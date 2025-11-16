@@ -1,4 +1,4 @@
-[🏠 홈](../../README.md) | [📚 전체 목차](../../README.md#-전체-문서-목차)
+[🏠 홈](../../../README.md) | [📚 전체 목차](../../../README.md#-전체-문서-목차)
 
 ---
 
@@ -380,4 +380,4 @@ sigma input: 커스텀 시퀀스
 
 ---
 
-[🏠 홈으로](../../README.md) | [📖 고급 기술](../README.md)
+[🏠 홈으로](../../../README.md) | [📖 Sampler 비교](./sampler-comparison.md)
