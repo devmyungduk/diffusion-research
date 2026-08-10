@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="520" viewBox="0 0 1180 520" role="img" aria-labelledby="sca-title sca-desc" shape-rendering="geometricPrecision" text-rendering="geometricPrecision">
+  <title id="sca-title">SamplerCustomAdvanced의 다섯 입력을 조립하는 배선도</title>
+  <desc id="sca-desc">SamplerCustomAdvanced는 noise, guider, sampler, sigmas, latent_image 다섯 입력을 각각 다른 노드에서 받습니다. RandomNoise가 NOISE를, CFGGuider가 GUIDER를, KSamplerSelect가 SAMPLER를, BasicScheduler가 SIGMAS를, Empty Latent Image가 LATENT를 공급합니다. MODEL은 CFGGuider와 BasicScheduler 두 곳으로 갈라져 들어가고, 결과 latent는 VAE Decode로 나갑니다. 하나라도 비면 실행되지 않습니다.</desc>
+  <defs>
+    <pattern id="sca-dots" width="32" height="32" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="1" fill="#334155" opacity=".42"/>
+    </pattern>
+    <filter id="sca-shadow" x="-15%" y="-15%" width="130%" height="145%">
+      <feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="#020617" flood-opacity=".32"/>
+    </filter>
+    <style>
+      .ui { font-family: Pretendard, "Noto Sans KR", "Segoe UI", Arial, sans-serif; }
+      .node { fill: #151e2d; stroke: #334155; stroke-width: 1.5; }
+      .header { fill: #1e293b; }
+      .wire { fill: none; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; opacity: .98; vector-effect: non-scaling-stroke; }
+      .port-label { font-size: 12px; font-weight: 700; fill: #cbd5e1; }
+      .muted { fill: #94a3b8; }
+      .title-t { fill: #f8fafc; font-size: 13px; font-weight: 700; }
+    </style>
+  </defs>
+
+  <rect width="1180" height="520" rx="24" fill="#0b1220"/>
+  <rect width="1180" height="520" rx="24" fill="url(#sca-dots)"/>
+
+  <g class="ui">
+    <text x="40" y="42" fill="#f8fafc" font-size="24" font-weight="700">SamplerCustomAdvanced 조립도</text>
+    <text x="40" y="70" class="muted" font-size="15">다섯 입력이 각각 다른 노드에서 오고 타입도 모두 다릅니다. 하나라도 비면 실행되지 않습니다.</text>
+  </g>
+
+  <g id="sca-connections">
+    <!-- RandomNoise → noise -->
+    <path class="wire" d="M330 120 L700 120 L700 150 L760 150" stroke="#cbd5e1"/>
+    <!-- MODEL → CFGGuider -->
+    <path class="wire" data-type="MODEL" data-from="model-out" data-to="guider-model" d="M330 200 L370 200" stroke="#B39DDB"/>
+    <!-- MODEL → BasicScheduler (분기, 아래로 우회) -->
+    <path class="wire" data-type="MODEL" data-from="model-out" data-to="sched-model" d="M330 200 L350 200 L350 380 L370 380" stroke="#B39DDB"/>
+    <!-- CONDITIONING → CFGGuider -->
+    <path class="wire" data-type="CONDITIONING" data-from="cond-out" data-to="guider-cond" d="M330 260 L370 260" stroke="#FFA931"/>
+    <!-- CFGGuider → guider -->
+    <path class="wire" d="M620 200 L680 200 L680 195 L760 195" stroke="#cbd5e1"/>
+    <!-- KSamplerSelect → sampler -->
+    <path class="wire" d="M330 320 L660 320 L660 240 L760 240" stroke="#cbd5e1"/>
+    <!-- BasicScheduler → sigmas -->
+    <path class="wire" d="M620 380 L640 380 L640 285 L760 285" stroke="#cbd5e1"/>
+    <!-- Empty Latent → latent_image -->
+    <path class="wire" data-type="LATENT" data-from="latent-out" data-to="sca-latent" d="M330 450 L720 450 L720 330 L760 330" stroke="#FF9CF9"/>
+    <!-- SamplerCustomAdvanced → VAE Decode -->
+    <path class="wire" data-type="LATENT" data-from="sca-out" data-to="vae-in" d="M980 240 L1030 240" stroke="#FF9CF9"/>
+  </g>
+
+  <g class="ui" filter="url(#sca-shadow)">
+    <g>
+      <rect class="node" x="100" y="92" width="230" height="56" rx="10"/>
+      <rect class="header" x="100" y="92" width="230" height="26" rx="10"/>
+      <text x="114" y="110" class="title-t">RandomNoise</text>
+      <text x="316" y="136" class="port-label" text-anchor="end">NOISE</text>
+    </g>
+    <g>
+      <rect class="node" x="100" y="172" width="230" height="116" rx="10"/>
+      <rect class="header" x="100" y="172" width="230" height="26" rx="10"/>
+      <text x="114" y="190" class="title-t">Load Checkpoint · Text Encode</text>
+      <text x="316" y="216" class="port-label" text-anchor="end">MODEL</text>
+      <text x="316" y="276" class="port-label" text-anchor="end">CONDITIONING</text>
+    </g>
+    <g>
+      <rect class="node" x="100" y="292" width="230" height="56" rx="10"/>
+      <rect class="header" x="100" y="292" width="230" height="26" rx="10"/>
+      <text x="114" y="310" class="title-t">KSamplerSelect</text>
+      <text x="316" y="336" class="port-label" text-anchor="end">SAMPLER</text>
+    </g>
+    <g>
+      <rect class="node" x="100" y="422" width="230" height="56" rx="10"/>
+      <rect class="header" x="100" y="422" width="230" height="26" rx="10"/>
+      <text x="114" y="440" class="title-t">Empty Latent Image</text>
+      <text x="316" y="466" class="port-label" text-anchor="end">LATENT</text>
+    </g>
+
+    <g>
+      <rect class="node" x="370" y="172" width="250" height="116" rx="10"/>
+      <rect class="header" x="370" y="172" width="250" height="26" rx="10"/>
+      <text x="384" y="190" class="title-t">CFGGuider</text>
+      <text x="384" y="216" class="port-label">model</text>
+      <text x="384" y="276" class="port-label">positive / negative</text>
+      <text x="606" y="216" class="port-label" text-anchor="end">GUIDER</text>
+    </g>
+    <g>
+      <rect class="node" x="370" y="352" width="250" height="56" rx="10"/>
+      <rect class="header" x="370" y="352" width="250" height="26" rx="10"/>
+      <text x="384" y="370" class="title-t">BasicScheduler</text>
+      <text x="384" y="396" class="port-label">model</text>
+      <text x="606" y="396" class="port-label" text-anchor="end">SIGMAS</text>
+    </g>
+
+    <g>
+      <rect class="node" x="760" y="122" width="220" height="236" rx="10"/>
+      <rect class="header" x="760" y="122" width="220" height="26" rx="10"/>
+      <text x="774" y="140" class="title-t">SamplerCustomAdvanced</text>
+      <text x="774" y="155" class="port-label">noise</text>
+      <text x="774" y="200" class="port-label">guider</text>
+      <text x="774" y="245" class="port-label">sampler</text>
+      <text x="774" y="290" class="port-label">sigmas</text>
+      <text x="774" y="335" class="port-label">latent_image</text>
+      <text x="966" y="245" class="port-label" text-anchor="end">output</text>
+    </g>
+
+    <g>
+      <rect class="node" x="1030" y="212" width="120" height="56" rx="10"/>
+      <rect class="header" x="1030" y="212" width="120" height="26" rx="10"/>
+      <text x="1044" y="230" class="title-t">VAE Decode</text>
+      <text x="1044" y="256" class="port-label">samples</text>
+    </g>
+  </g>
+
+  <g id="sca-ports">
+    <circle id="noise-out" cx="330" cy="120" r="6" fill="#cbd5e1"/>
+    <circle id="model-out" cx="330" cy="200" r="6" data-type="MODEL" fill="#B39DDB"/>
+    <circle id="cond-out" cx="330" cy="260" r="6" data-type="CONDITIONING" fill="#FFA931"/>
+    <circle id="samplersel-out" cx="330" cy="320" r="6" fill="#cbd5e1"/>
+    <circle id="latent-out" cx="330" cy="450" r="6" data-type="LATENT" fill="#FF9CF9"/>
+
+    <circle id="guider-model" cx="370" cy="200" r="6" data-type="MODEL" fill="#B39DDB"/>
+    <circle id="guider-cond" cx="370" cy="260" r="6" data-type="CONDITIONING" fill="#FFA931"/>
+    <circle id="guider-out" cx="620" cy="200" r="6" fill="#cbd5e1"/>
+    <circle id="sched-model" cx="370" cy="380" r="6" data-type="MODEL" fill="#B39DDB"/>
+    <circle id="sched-out" cx="620" cy="380" r="6" fill="#cbd5e1"/>
+
+    <circle id="sca-noise" cx="760" cy="150" r="6" fill="#cbd5e1"/>
+    <circle id="sca-guider" cx="760" cy="195" r="6" fill="#cbd5e1"/>
+    <circle id="sca-sampler" cx="760" cy="240" r="6" fill="#cbd5e1"/>
+    <circle id="sca-sigmas" cx="760" cy="285" r="6" fill="#cbd5e1"/>
+    <circle id="sca-latent" cx="760" cy="330" r="6" data-type="LATENT" fill="#FF9CF9"/>
+    <circle id="sca-out" cx="980" cy="240" r="6" data-type="LATENT" fill="#FF9CF9"/>
+    <circle id="vae-in" cx="1030" cy="240" r="6" data-type="LATENT" fill="#FF9CF9"/>
+  </g>
+</svg>

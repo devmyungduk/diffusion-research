@@ -1,0 +1,428 @@
+:root {
+  --md-primary-fg-color: #6d4aff;
+  --md-accent-fg-color: #ff5d8f;
+  --learning-concept: #573bd1;
+  --learning-action: #006f99;
+  --learning-success: #147a4b;
+  --learning-caution: #8f5200;
+  --learning-danger: #b32646;
+}
+
+[data-md-color-scheme="slate"] {
+  --learning-concept: #c0b6ff;
+  --learning-action: #79d8ff;
+  --learning-success: #79dca9;
+  --learning-caution: #ffc46b;
+  --learning-danger: #ff8ca0;
+}
+
+.md-typeset h1 {
+  color: var(--learning-concept);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+}
+
+.md-typeset h2 {
+  --section-accent: var(--learning-concept);
+  border-left: 0.18rem solid var(--section-accent);
+  border-bottom: 1px solid color-mix(in srgb, var(--md-default-fg-color) 12%, transparent);
+  border-radius: 0.2rem;
+  padding: 0.32rem 0.55rem 0.38rem;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--section-accent) 10%, transparent),
+    transparent 72%
+  );
+  color: var(--section-accent);
+}
+
+.md-typeset h3 {
+  --section-accent: var(--learning-action);
+  color: var(--section-accent);
+}
+
+.md-typeset :is(h2, h3):is(
+  [id*="실습"],
+  [id*="단계"],
+  [id*="설치"],
+  [id*="실행"],
+  [id*="만들기"],
+  [id*="워크플로"],
+  [id*="설정"],
+  [id*="사용"]
+) {
+  --section-accent: var(--learning-action);
+}
+
+.md-typeset :is(h2, h3):is(
+  [id*="완료"],
+  [id*="결과"],
+  [id*="체크"],
+  [id*="확인"],
+  [id*="성공"],
+  [id*="다음"]
+) {
+  --section-accent: var(--learning-success);
+}
+
+.md-typeset :is(h2, h3):is(
+  [id*="주의"],
+  [id*="경고"],
+  [id*="위험"],
+  [id*="한계"]
+) {
+  --section-accent: var(--learning-caution);
+}
+
+.md-typeset :is(h2, h3):is(
+  [id*="오류"],
+  [id*="실패"],
+  [id*="문제"],
+  [id*="안-될"]
+) {
+  --section-accent: var(--learning-danger);
+}
+
+.md-typeset :is(p, li, td, blockquote) > strong {
+  color: var(--learning-concept);
+}
+
+.md-typeset :not(pre) > code {
+  border: 1px solid color-mix(in srgb, var(--learning-action) 22%, transparent);
+  background-color: color-mix(in srgb, var(--learning-action) 8%, transparent);
+  color: var(--learning-action);
+}
+
+.md-typeset blockquote {
+  border-left-color: var(--learning-concept);
+  border-radius: 0 0.35rem 0.35rem 0;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--learning-concept) 9%, transparent),
+    transparent 82%
+  );
+  color: var(--md-default-fg-color);
+}
+
+.md-typeset table:not([class]) th {
+  background-color: color-mix(in srgb, var(--learning-concept) 10%, transparent);
+  color: var(--learning-concept);
+}
+
+.md-typeset .task-list-item:has(input[type="checkbox"]:checked) {
+  color: var(--learning-success);
+}
+
+.md-typeset mark {
+  border-radius: 0.18rem;
+  padding-inline: 0.14em;
+  background-color: color-mix(in srgb, var(--learning-caution) 22%, transparent);
+  color: var(--learning-caution);
+}
+
+.md-typeset .admonition,
+.md-typeset details {
+  border-left: 0.2rem solid var(--learning-action);
+}
+
+.md-typeset :is(.admonition, details):is(.tip, .success, .check, .done) {
+  border-left-color: var(--learning-success);
+}
+
+.md-typeset :is(.admonition, details):is(.warning, .caution, .attention) {
+  border-left-color: var(--learning-caution);
+}
+
+.md-typeset :is(.admonition, details):is(.failure, .danger, .error, .bug) {
+  border-left-color: var(--learning-danger);
+}
+
+.md-typeset :is(.admonition, details):is(.question, .example, .quote) {
+  border-left-color: var(--learning-concept);
+}
+
+.md-typeset .learning-color-key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.55rem;
+  margin: 1rem 0 1.25rem;
+}
+
+.md-typeset .learning-color-key__item {
+  --key-color: var(--learning-concept);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border: 1px solid color-mix(in srgb, var(--key-color) 28%, transparent);
+  border-radius: 999px;
+  padding: 0.18rem 0.48rem;
+  background-color: color-mix(in srgb, var(--key-color) 8%, transparent);
+  color: var(--key-color);
+  font-size: 0.68rem;
+  font-weight: 700;
+}
+
+.md-typeset .learning-color-key__item::before {
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 50%;
+  background-color: var(--key-color);
+  content: "";
+}
+
+.md-typeset .learning-color-key__item--action {
+  --key-color: var(--learning-action);
+}
+
+.md-typeset .learning-color-key__item--success {
+  --key-color: var(--learning-success);
+}
+
+.md-typeset .learning-color-key__item--caution {
+  --key-color: var(--learning-caution);
+}
+
+.md-typeset .learning-color-key__item--danger {
+  --key-color: var(--learning-danger);
+}
+
+.md-typeset img {
+  border-radius: 0.75rem;
+}
+
+.md-typeset .workflow-figure {
+  margin-block: 1.25rem 1rem;
+}
+
+.md-typeset .workflow-figure > p {
+  margin: 0;
+}
+
+.md-typeset .workflow-figure a {
+  display: block;
+  border-radius: 0.75rem;
+  outline: 1px solid color-mix(in srgb, var(--md-default-fg-color) 12%, transparent);
+  transition: outline-color 160ms ease, transform 160ms ease;
+}
+
+.md-typeset .workflow-figure a:hover,
+.md-typeset .workflow-figure a:focus-visible {
+  outline-color: var(--md-accent-fg-color);
+}
+
+.md-typeset .workflow-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.md-typeset .workflow-figure__caption {
+  padding-top: 0.45rem;
+  color: var(--md-default-fg-color--light);
+  font-size: 0.68rem;
+  text-align: center;
+}
+
+.md-typeset table:not([class]) {
+  font-size: 0.76rem;
+}
+
+.md-typeset .guide-meta {
+  margin: 1rem 0;
+  border-radius: 0.5rem;
+  padding: 0.7rem 1rem 0.8rem;
+  background-color: color-mix(in srgb, var(--learning-concept) 7%, transparent);
+  border: 1px solid color-mix(in srgb, var(--learning-concept) 18%, transparent);
+}
+
+.md-typeset .guide-meta > ul {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.md-typeset .guide-meta li {
+  margin: 0.2rem 0;
+}
+
+/* 한 줄로 압축한 메타 정보. 본문이 화면 위쪽에 오도록 높이를 줄인다. */
+.md-typeset .guide-meta {
+  padding: 0.55rem 0.9rem;
+}
+
+.md-typeset .guide-meta > p {
+  margin: 0;
+  font-size: 0.72rem;
+  line-height: 1.65;
+  color: var(--md-default-fg-color--light);
+}
+
+.md-typeset .guide-meta > p + p {
+  margin-top: 0.3rem;
+}
+
+.md-typeset .guide-meta > p > strong {
+  color: var(--md-default-fg-color);
+  font-weight: 700;
+}
+
+.md-typeset .guide-meta > p > strong::after {
+  content: " ";
+}
+
+.md-typeset .grid.cards > ul > li {
+  border-radius: 0.75rem;
+  transition: border-color 160ms ease, transform 160ms ease;
+}
+
+.md-typeset .grid.cards > ul > li:hover {
+  border-color: var(--md-accent-fg-color);
+  transform: translateY(-2px);
+}
+
+.md-typeset .learning-path-cards > ul > li {
+  --card-tone: var(--learning-concept);
+  border-top: 0.18rem solid var(--card-tone);
+}
+
+.md-typeset .learning-path-cards > ul > li:nth-child(1) {
+  --card-tone: var(--learning-action);
+}
+
+.md-typeset .learning-path-cards > ul > li:nth-child(3) {
+  --card-tone: var(--learning-success);
+}
+
+.md-typeset .learning-path-cards > ul > li:nth-child(4) {
+  --card-tone: var(--learning-danger);
+}
+
+.md-typeset .learning-path-cards > ul > li:hover {
+  border-color: var(--card-tone);
+}
+
+.md-typeset .learning-path-cards > ul > li > :first-child strong {
+  color: var(--card-tone);
+}
+
+@media (min-width: 76.25em) {
+  .md-grid {
+    max-width: 84rem;
+  }
+
+  .md-typeset .workflow-figure {
+    width: min(70rem, calc(100vw - 30rem));
+    margin-left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 44.984375em) {
+  .md-typeset h2 {
+    padding-inline: 0.45rem;
+  }
+
+  .md-typeset .learning-color-key {
+    gap: 0.35rem;
+  }
+
+  .md-typeset .workflow-figure {
+    width: calc(100% + 0.8rem);
+    margin-right: -0.8rem;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    padding-bottom: 0.25rem;
+    scrollbar-width: thin;
+  }
+
+  .md-typeset .workflow-figure > p:first-child {
+    min-width: 46rem;
+  }
+
+  .md-typeset .workflow-figure__caption {
+    position: sticky;
+    left: 0;
+    width: calc(100vw - 2.4rem);
+    text-align: left;
+  }
+}
+
+/* ============================================================
+   왼쪽 네비게이션 섹션 색 구분
+   00~05 각 장에 고유 색을 부여해 지금 어느 장을 보는지 구분한다.
+   ============================================================ */
+
+:root {
+  --nav-00: #0e7490;  /* 시작하기 */
+  --nav-01: #573bd1;  /* 핵심 개념 */
+  --nav-02: #0f766e;  /* 모델 */
+  --nav-03: #b45309;  /* 심화 제어 */
+  --nav-04: #15803d;  /* 워크플로우 */
+  --nav-05: #b32646;  /* 문제 해결 */
+}
+
+[data-md-color-scheme="slate"] {
+  --nav-00: #67e8f9;
+  --nav-01: #c0b6ff;
+  --nav-02: #5eead4;
+  --nav-03: #fbbf24;
+  --nav-04: #86efac;
+  --nav-05: #ff8ca0;
+}
+
+/* 최상위 섹션 라벨에 색 막대를 붙인다 */
+.md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link,
+.md-nav--primary > .md-nav__list > .md-nav__item > label.md-nav__link {
+  border-left: 0.2rem solid transparent;
+  padding-left: 0.5rem;
+  border-radius: 0.15rem;
+  font-weight: 700;
+}
+
+/* 섹션별 색. nav 순서에 맞춘다 (홈, 00, 01, 02, 03, 04, 학습 예제, 05, 용어 사전) */
+.md-nav--primary > .md-nav__list > .md-nav__item:nth-child(2) > .md-nav__link { border-left-color: var(--nav-00); color: var(--nav-00); }
+.md-nav--primary > .md-nav__list > .md-nav__item:nth-child(3) > .md-nav__link { border-left-color: var(--nav-01); color: var(--nav-01); }
+.md-nav--primary > .md-nav__list > .md-nav__item:nth-child(4) > .md-nav__link { border-left-color: var(--nav-02); color: var(--nav-02); }
+.md-nav--primary > .md-nav__list > .md-nav__item:nth-child(5) > .md-nav__link { border-left-color: var(--nav-03); color: var(--nav-03); }
+.md-nav--primary > .md-nav__list > .md-nav__item:nth-child(6) > .md-nav__link { border-left-color: var(--nav-04); color: var(--nav-04); }
+.md-nav--primary > .md-nav__list > .md-nav__item:nth-child(7) > .md-nav__link { border-left-color: var(--nav-04); color: var(--nav-04); }
+.md-nav--primary > .md-nav__list > .md-nav__item:nth-child(8) > .md-nav__link { border-left-color: var(--nav-05); color: var(--nav-05); }
+
+/* 하위 문서 목록에도 같은 색의 옅은 세로선을 남겨 소속을 표시 */
+.md-nav--primary > .md-nav__list > .md-nav__item:nth-child(2) > .md-nav { border-left: 1px solid color-mix(in srgb, var(--nav-00) 45%, transparent); }
+.md-nav--primary > .md-nav__list > .md-nav__item:nth-child(3) > .md-nav { border-left: 1px solid color-mix(in srgb, var(--nav-01) 45%, transparent); }
+.md-nav--primary > .md-nav__list > .md-nav__item:nth-child(4) > .md-nav { border-left: 1px solid color-mix(in srgb, var(--nav-02) 45%, transparent); }
+.md-nav--primary > .md-nav__list > .md-nav__item:nth-child(5) > .md-nav { border-left: 1px solid color-mix(in srgb, var(--nav-03) 45%, transparent); }
+.md-nav--primary > .md-nav__list > .md-nav__item:nth-child(6) > .md-nav { border-left: 1px solid color-mix(in srgb, var(--nav-04) 45%, transparent); }
+.md-nav--primary > .md-nav__list > .md-nav__item:nth-child(7) > .md-nav { border-left: 1px solid color-mix(in srgb, var(--nav-04) 45%, transparent); }
+.md-nav--primary > .md-nav__list > .md-nav__item > .md-nav {
+  margin-left: 0.35rem;
+  padding-left: 0.35rem;
+}
+
+/* ============================================================
+   표 폭
+   Material 기본값은 display:inline-block 이라 표가 내용 폭만큼만
+   차지하고 오른쪽에 공백이 남는다. 열이 3개 이상인 표만 본문 폭을
+   채우게 해 가로를 넓히고 세로 줄바꿈을 줄인다.
+   2열짜리 짧은 표는 늘어나면 오히려 허전해져 기본값을 유지한다.
+   표를 감싸는 .md-typeset__scrollwrap 은 그대로라 좁은 화면의
+   가로 스크롤은 유지된다.
+   ============================================================ */
+
+.md-typeset table:not([class]):has(th:nth-child(3)) {
+  display: table;
+  width: 100%;
+}
+
+/* 첫 열은 항목 이름이라 잘 접히지 않게, 나머지는 고르게 나눈다 */
+.md-typeset table:not([class]):has(th:nth-child(3)) th:first-child,
+.md-typeset table:not([class]):has(th:nth-child(3)) td:first-child {
+  white-space: nowrap;
+}
+
+/* :has()를 지원하지 않는 환경에서는 기본 동작으로 되돌아간다 */
+@supports not selector(:has(*)) {
+  .md-typeset table:not([class]) {
+    min-width: 70%;
+  }
+}

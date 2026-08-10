@@ -1,0 +1,25 @@
+purpose: "기본 Text-to-Image 학습"
+verified_with:
+  comfyui_version: "실행 후 기록"
+  verification_date: "실행 후 기록"
+model:
+  family: "SDXL"
+  checkpoint_file: "Load Checkpoint에서 선택 후 기록"
+settings:
+  width: 1024
+  height: 1024
+  seed: 123456
+  control_after_generate: "fixed"
+  steps: 25
+  cfg: 6.0
+  sampler_name: "euler"
+  scheduler: "normal"
+  denoise: 1.0
+prompts:
+  positive: "a small red cabin beside a calm lake, pine forest, soft morning light, cinematic composition, detailed digital illustration"
+  negative: "blurry, low quality, distorted, text, watermark"
+observation:
+  result: "실행 후 기록"
+  changed_variable: "비교 실험 후 기록"
+  next_test: "비교 실험 후 기록"
+

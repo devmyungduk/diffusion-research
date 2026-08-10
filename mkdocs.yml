@@ -1,0 +1,116 @@
+site_name: Diffusion Research & ComfyUI Guide
+site_description: 원리와 실습을 연결하는 한국어 Diffusion·ComfyUI 온라인 학습서
+site_url: https://devmyungduk.github.io/diffusion-research/
+repo_url: https://github.com/devmyungduk/diffusion-research
+repo_name: devmyungduk/diffusion-research
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  language: ko
+  features:
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.path
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - search.highlight
+    - search.suggest
+    - content.code.copy
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: deep purple
+      accent: pink
+      toggle:
+        icon: material/weather-night
+        name: 어두운 화면으로 전환
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: deep purple
+      accent: pink
+      toggle:
+        icon: material/weather-sunny
+        name: 밝은 화면으로 전환
+
+plugins:
+  - search:
+      lang:
+        - ko
+        - en
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - markdown.extensions.toc:
+      permalink: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+extra_css:
+  - stylesheets/extra.css
+
+nav:
+  - 홈: README.md
+  - 00 시작하기:
+      - 학습 안내: 00-getting-started/README.md
+      - 설치: 00-getting-started/installation.md
+      - 5분 빠른 시작: 00-getting-started/quick-start.md
+      - 워크플로우 이해: 00-getting-started/workflow-basics.md
+      - 프롬프트와 CLIP: 00-getting-started/prompt-basics.md
+      - 첫 워크플로우 만들기: 00-getting-started/first-workflow.md
+      - 저장과 재현: 00-getting-started/save-and-reproduce.md
+  - 01 핵심 개념:
+      - 개념 지도: 01-core-concepts/README.md
+      - CLIP과 대조 학습: 01-core-concepts/clip-contrastive-learning.md
+      - 디노이징 프로세스: 01-core-concepts/denoising-process.md
+  - 02 모델:
+      - 모델 가이드: 02-models/README.md
+      - Flux:
+          - Flux 개요: 02-models/flux/README.md
+          - 텍스트 인코더와 데이터 공간: 02-models/flux/text-encoders.md
+          - 빠른 참조: 02-models/flux/quick-reference.md
+          - 작업 선택과 Redux 실습: 02-models/flux/flux-practical.md
+          - FluxGuidance 이해와 사용: 02-models/flux/fluxguidance-pipeline.md
+      - SD·SDXL:
+          - SD·SDXL 개요: 02-models/sd-sdxl/README.md
+          - 해상도 최적화: 02-models/sd-sdxl/resolution-optimization.md
+  - 03 심화 제어:
+      - 심화 제어 안내: 03-advanced-techniques/README.md
+      - 프롬프트 가중치: 03-advanced-techniques/prompt-weighting.md
+      - LoRA 기본: 03-advanced-techniques/lora/README.md
+      - LoRA 조합과 선택: 03-advanced-techniques/lora/combining.md
+      - 제어 기법:
+          - ControlNet 아키텍처: 03-advanced-techniques/controlnet/controlnet-architecture.md
+          - ControlNet 연결과 조절: 03-advanced-techniques/controlnet/controlnet-pipeline.md
+          - IPAdapter: 03-advanced-techniques/controlnet/ipadapter.md
+          - Flux Redux: 03-advanced-techniques/controlnet/flux-redux.md
+          - Differential Diffusion: 03-advanced-techniques/controlnet/differential-diffusion.md
+          - Flux 모델 변형: 03-advanced-techniques/controlnet/flux-model-variants.md
+          - 실전 워크플로우: 03-advanced-techniques/controlnet/example-workflows.md
+      - Sampler:
+          - Sampler 비교: 03-advanced-techniques/samplers/sampler-comparison.md
+          - KSampler와 Advanced: 03-advanced-techniques/samplers/ksampler-vs-advanced.md
+  - 04 워크플로우:
+      - 워크플로우 예제: 04-workflows/README.md
+      - 업스케일과 배치 생성: 04-workflows/upscale-and-batch.md
+  - 학습 예제:
+      - 기본 Text-to-Image 템플릿: examples/basic-text-to-image/README.md
+  - 05 문제 해결: 05-troubleshooting/README.md
+  - 용어 사전: GLOSSARY.md
+
+copyright: Copyright © 2025–2026 myungduk kim
