@@ -1,0 +1,172 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1320" height="612" viewBox="0 0 1320 612" role="img" aria-labelledby="cn-title cn-desc" shape-rendering="geometricPrecision" text-rendering="geometricPrecision">
+  <title id="cn-title">FLUX.1 dev와 ControlNet을 KSampler에 연결하는 배선도</title>
+  <desc id="cn-desc">프롬프트를 인코딩한 conditioning이 FluxGuidance를 거쳐 Apply ControlNet의 positive로, 빈 텍스트를 인코딩한 conditioning이 negative로 들어갑니다. Load ControlNet은 control_net으로, Load Image를 전처리한 결과는 image로 들어갑니다. Apply ControlNet은 positive와 negative 두 conditioning을 함께 내보내고, 이 둘이 MODEL·빈 Latent와 함께 KSampler로 모입니다. 연결선은 모두 직각으로 꺾여 노드를 가로지르지 않습니다.</desc>
+  <defs>
+    <pattern id="cn-dots" width="32" height="32" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="1" fill="#334155" opacity=".42"/>
+    </pattern>
+    <filter id="cn-shadow" x="-15%" y="-15%" width="130%" height="145%">
+      <feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="#020617" flood-opacity=".32"/>
+    </filter>
+    <style>
+      .ui { font-family: Pretendard, "Noto Sans KR", "Segoe UI", Arial, sans-serif; }
+      .node { fill: #151e2d; stroke: #334155; stroke-width: 1.5; }
+      .header { fill: #1e293b; }
+      .wire { fill: none; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; opacity: .98; vector-effect: non-scaling-stroke; }
+      .port-label { font-size: 12px; font-weight: 700; fill: #cbd5e1; }
+      .muted { fill: #94a3b8; }
+      .title-t { fill: #f8fafc; font-size: 15px; font-weight: 700; }
+    </style>
+  </defs>
+
+  <rect width="1320" height="612" rx="24" fill="#0b1220"/>
+  <rect width="1320" height="612" rx="24" fill="url(#cn-dots)"/>
+
+  <g class="ui">
+    <text x="40" y="42" fill="#f8fafc" font-size="24" font-weight="700">FLUX.1 dev + ControlNet 배선도</text>
+    <text x="40" y="70" class="muted" font-size="15">Apply ControlNet은 positive와 negative를 함께 받아 함께 내보냅니다. 한쪽만 이으면 조건이 어긋납니다.</text>
+  </g>
+
+  <!-- ============ 연결선 (직각 배선) ============ -->
+  <g transform="translate(0,50)">
+  <g id="cn-connections">
+    <!-- CLIP Text Encode(prompt) → FluxGuidance -->
+    <path class="wire" data-type="CONDITIONING" data-from="pos-out" data-to="fg-in" d="M290 165 L330 165" stroke="#FFA931"/>
+    <!-- FluxGuidance → Apply ControlNet.positive -->
+    <path class="wire" data-type="CONDITIONING" data-from="fg-out" data-to="ac-positive" d="M560 165 L620 165 L620 175 L700 175" stroke="#FFA931"/>
+    <!-- CLIP Text Encode(empty) → Apply ControlNet.negative -->
+    <path class="wire" data-type="CONDITIONING" data-from="neg-out" data-to="ac-negative" d="M290 245 L620 245 L620 215 L700 215" stroke="#FFA931"/>
+    <!-- Load ControlNet → control_net -->
+    <path class="wire" d="M290 330 L620 330 L620 255 L700 255" stroke="#94a3b8"/>
+    <!-- Load Image → Preprocessor -->
+    <path class="wire" data-type="IMAGE" data-from="li-out" data-to="pp-in" d="M290 425 L330 425" stroke="#64B5F6"/>
+    <!-- Preprocessor → image -->
+    <path class="wire" data-type="IMAGE" data-from="pp-out" data-to="ac-image" d="M560 425 L620 425 L620 295 L700 295" stroke="#64B5F6"/>
+
+    <!-- Apply ControlNet.positive → KSampler.positive -->
+    <path class="wire" data-type="CONDITIONING" data-from="ac-out-pos" data-to="ks-positive" d="M900 175 L960 175 L960 215 L1030 215" stroke="#FFA931"/>
+    <!-- Apply ControlNet.negative → KSampler.negative -->
+    <path class="wire" data-type="CONDITIONING" data-from="ac-out-neg" data-to="ks-negative" d="M900 215 L940 215 L940 255 L1030 255" stroke="#FFA931"/>
+    <!-- MODEL → KSampler.model -->
+    <path class="wire" data-type="MODEL" data-from="lm-out" data-to="ks-model" d="M290 90 L980 90 L980 175 L1030 175" stroke="#B39DDB"/>
+    <!-- Empty Latent → KSampler.latent_image -->
+    <path class="wire" data-type="LATENT" data-from="el-out" data-to="ks-latent" d="M560 500 L1000 500 L1000 295 L1030 295" stroke="#FF9CF9"/>
+  </g>
+
+  <!-- ============ 노드 ============ -->
+  <g class="ui" filter="url(#cn-shadow)">
+    <!-- Load Diffusion Model -->
+    <g>
+      <rect class="node" x="60" y="62" width="230" height="56" rx="10"/>
+      <rect class="header" x="60" y="62" width="230" height="26" rx="10"/>
+      <text x="74" y="80" class="title-t" font-size="13">Load Diffusion Model</text>
+      <text x="276" y="106" class="port-label" text-anchor="end">MODEL</text>
+    </g>
+    <!-- CLIP Text Encode (prompt) -->
+    <g>
+      <rect class="node" x="60" y="137" width="230" height="56" rx="10"/>
+      <rect class="header" x="60" y="137" width="230" height="26" rx="10"/>
+      <text x="74" y="155" class="title-t" font-size="13">CLIP Text Encode · 프롬프트</text>
+      <text x="276" y="181" class="port-label" text-anchor="end">CONDITIONING</text>
+    </g>
+    <!-- CLIP Text Encode (empty) -->
+    <g>
+      <rect class="node" x="60" y="217" width="230" height="56" rx="10"/>
+      <rect class="header" x="60" y="217" width="230" height="26" rx="10"/>
+      <text x="74" y="235" class="title-t" font-size="13">CLIP Text Encode · 빈 텍스트</text>
+      <text x="276" y="261" class="port-label" text-anchor="end">CONDITIONING</text>
+    </g>
+    <!-- Load ControlNet -->
+    <g>
+      <rect class="node" x="60" y="302" width="230" height="56" rx="10"/>
+      <rect class="header" x="60" y="302" width="230" height="26" rx="10"/>
+      <text x="74" y="320" class="title-t" font-size="13">Load ControlNet</text>
+      <text x="276" y="346" class="port-label" text-anchor="end">CONTROL_NET</text>
+    </g>
+    <!-- Load Image -->
+    <g>
+      <rect class="node" x="60" y="397" width="230" height="56" rx="10"/>
+      <rect class="header" x="60" y="397" width="230" height="26" rx="10"/>
+      <text x="74" y="415" class="title-t" font-size="13">Load Image</text>
+      <text x="276" y="441" class="port-label" text-anchor="end">IMAGE</text>
+    </g>
+
+    <!-- FluxGuidance -->
+    <g>
+      <rect class="node" x="330" y="137" width="230" height="56" rx="10"/>
+      <rect class="header" x="330" y="137" width="230" height="26" rx="10"/>
+      <text x="344" y="155" class="title-t" font-size="13">FluxGuidance</text>
+      <text x="344" y="181" class="port-label">conditioning</text>
+      <text x="546" y="181" class="port-label" text-anchor="end">CONDITIONING</text>
+    </g>
+    <!-- Preprocessor -->
+    <g>
+      <rect class="node" x="330" y="397" width="230" height="56" rx="10"/>
+      <rect class="header" x="330" y="397" width="230" height="26" rx="10"/>
+      <text x="344" y="415" class="title-t" font-size="13">Preprocessor · Canny 등</text>
+      <text x="344" y="441" class="port-label">image</text>
+      <text x="546" y="441" class="port-label" text-anchor="end">IMAGE</text>
+    </g>
+    <!-- Empty Latent -->
+    <g>
+      <rect class="node" x="330" y="472" width="230" height="56" rx="10"/>
+      <rect class="header" x="330" y="472" width="230" height="26" rx="10"/>
+      <text x="344" y="490" class="title-t" font-size="13">Empty Latent Image</text>
+      <text x="546" y="516" class="port-label" text-anchor="end">LATENT</text>
+    </g>
+
+    <!-- Apply ControlNet -->
+    <g>
+      <rect class="node" x="700" y="137" width="200" height="176" rx="10"/>
+      <rect class="header" x="700" y="137" width="200" height="26" rx="10"/>
+      <text x="714" y="155" class="title-t" font-size="13">Apply ControlNet</text>
+      <text x="714" y="180" class="port-label">positive</text>
+      <text x="886" y="180" class="port-label" text-anchor="end">positive</text>
+      <text x="714" y="220" class="port-label">negative</text>
+      <text x="886" y="220" class="port-label" text-anchor="end">negative</text>
+      <text x="714" y="260" class="port-label">control_net</text>
+      <text x="714" y="300" class="port-label">image</text>
+    </g>
+
+    <!-- KSampler -->
+    <g>
+      <rect class="node" x="1030" y="137" width="220" height="196" rx="10"/>
+      <rect class="header" x="1030" y="137" width="220" height="26" rx="10"/>
+      <text x="1044" y="155" class="title-t" font-size="13">KSampler</text>
+      <text x="1044" y="180" class="port-label">model</text>
+      <text x="1044" y="220" class="port-label">positive</text>
+      <text x="1044" y="260" class="port-label">negative</text>
+      <text x="1044" y="300" class="port-label">latent_image</text>
+      <text x="1236" y="325" class="port-label" text-anchor="end">LATENT</text>
+    </g>
+  </g>
+
+  <!-- ============ 포트 ============ -->
+  <g id="cn-ports">
+    <circle id="lm-out" cx="290" cy="90" r="6" data-type="MODEL" fill="#B39DDB"/>
+    <circle id="pos-out" cx="290" cy="165" r="6" data-type="CONDITIONING" fill="#FFA931"/>
+    <circle id="neg-out" cx="290" cy="245" r="6" data-type="CONDITIONING" fill="#FFA931"/>
+    <circle id="lcn-out" cx="290" cy="330" r="6" fill="#94a3b8"/>
+    <circle id="li-out" cx="290" cy="425" r="6" data-type="IMAGE" fill="#64B5F6"/>
+
+    <circle id="fg-in" cx="330" cy="165" r="6" data-type="CONDITIONING" fill="#FFA931"/>
+    <circle id="fg-out" cx="560" cy="165" r="6" data-type="CONDITIONING" fill="#FFA931"/>
+    <circle id="pp-in" cx="330" cy="425" r="6" data-type="IMAGE" fill="#64B5F6"/>
+    <circle id="pp-out" cx="560" cy="425" r="6" data-type="IMAGE" fill="#64B5F6"/>
+    <circle id="el-out" cx="560" cy="500" r="6" data-type="LATENT" fill="#FF9CF9"/>
+
+    <circle id="ac-positive" cx="700" cy="175" r="6" data-type="CONDITIONING" fill="#FFA931"/>
+    <circle id="ac-negative" cx="700" cy="215" r="6" data-type="CONDITIONING" fill="#FFA931"/>
+    <circle id="ac-controlnet" cx="700" cy="255" r="6" fill="#94a3b8"/>
+    <circle id="ac-image" cx="700" cy="295" r="6" data-type="IMAGE" fill="#64B5F6"/>
+    <circle id="ac-out-pos" cx="900" cy="175" r="6" data-type="CONDITIONING" fill="#FFA931"/>
+    <circle id="ac-out-neg" cx="900" cy="215" r="6" data-type="CONDITIONING" fill="#FFA931"/>
+
+    <circle id="ks-model" cx="1030" cy="175" r="6" data-type="MODEL" fill="#B39DDB"/>
+    <circle id="ks-positive" cx="1030" cy="215" r="6" data-type="CONDITIONING" fill="#FFA931"/>
+    <circle id="ks-negative" cx="1030" cy="255" r="6" data-type="CONDITIONING" fill="#FFA931"/>
+    <circle id="ks-latent" cx="1030" cy="295" r="6" data-type="LATENT" fill="#FF9CF9"/>
+    <circle id="ks-out" cx="1250" cy="320" r="6" data-type="LATENT" fill="#FF9CF9"/>
+  </g>
+  </g>
+</svg>

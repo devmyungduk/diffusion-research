@@ -1,0 +1,33 @@
+# 기록용 서식입니다. 이 파일을 복사해 자신의 실행값을 채웁니다.
+# 빈 문자열("")로 둔 항목이 직접 적을 자리입니다. 나머지는 workflow.json에 들어 있는 시작값입니다.
+
+purpose: "기본 Text-to-Image 학습"
+
+# --- 아래 네 항목은 실행한 사람이 채웁니다 ---
+verified_with:
+  comfyui_version: ""        # 예: 0.3.68  (메뉴 Help > About)
+  verification_date: ""      # 예: 2026-08-30
+model:
+  family: "SDXL"
+  checkpoint_file: ""        # Load Checkpoint의 ckpt_name에서 고른 파일명 그대로
+
+# --- 아래는 workflow.json의 시작값입니다. 바꿨다면 함께 고칩니다 ---
+settings:
+  width: 1024
+  height: 1024
+  seed: 123456
+  control_after_generate: "fixed"
+  steps: 25
+  cfg: 6.0
+  sampler_name: "euler"
+  scheduler: "normal"
+  denoise: 1.0
+prompts:
+  positive: "a small red cabin beside a calm lake, pine forest, soft morning light, cinematic composition, detailed digital illustration"
+  negative: "blurry, low quality, distorted, text, watermark"
+
+# --- 비교 실험을 마친 뒤 채웁니다 ---
+observation:
+  result: ""                 # 나온 결과를 한 줄로
+  changed_variable: ""       # 예: cfg 6.0 -> 4.0
+  next_test: ""              # 다음에 바꿔 볼 값 하나
